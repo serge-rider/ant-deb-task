@@ -15,6 +15,7 @@ public class DesktopEntry extends Task
 {
     private Properties _categories = new Properties ();
     private Properties _keys = new Properties ();
+    private final List customProperties = new ArrayList();
 
     private File _toFile;
 
@@ -22,6 +23,7 @@ public class DesktopEntry extends Task
     private List _localizedEntries = new ArrayList ();
 
     private static final Set VALID_ONLY_SHOW_IN = new HashSet (Arrays.asList (new String[] {"GNOME", "KDE", "ROX", "XFCE", "Old"}));
+
 
     public static class LocalizedEntry
     {
@@ -279,6 +281,10 @@ public class DesktopEntry extends Task
         _localizedEntries.add (icon);
     }
 
+    public void addProperty(DesktopEntryProperty customProperty) {
+        this.customProperties.add(customProperty);
+    }
+
     public void init() throws BuildException
     {
         _entries = new LinkedHashMap();
@@ -331,6 +337,14 @@ public class DesktopEntry extends Task
                 out.print(key);
                 out.print('=');
                 out.println(value);
+            }
+
+            // Print custom properties
+            for (int i = 0; i < customProperties.size(); i++) {
+                DesktopEntryProperty prop = (DesktopEntryProperty) customProperties.get(i);
+                out.print(prop.getName());
+                out.print('=');
+                out.println(prop.getValue());
             }
 
             out.close();
