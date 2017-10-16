@@ -28,3 +28,4 @@ This Ant task is used to build DBeaver Debian packages. It has no DBeaver depend
             <property name="StartupWMClass">SWT</property>
         </desktopentry>
 ```
+
