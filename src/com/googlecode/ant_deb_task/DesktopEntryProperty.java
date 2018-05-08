@@ -20,6 +20,10 @@ public class DesktopEntryProperty
         return value;
     }
 
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     public void addText(String text) {
         this.value = text;
     }
